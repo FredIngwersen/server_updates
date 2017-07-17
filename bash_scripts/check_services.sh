@@ -13,7 +13,7 @@ spawn ssh $username@$address -p $port
 expect "assword:"
 send "$password\r"
 expect "$ "
-send "sudo checkrestart | grep -E \"Found|distinct\" && echo \"These are the systemd services:\" && sudo checkrestart | grep \"systemctl restart\" && echo \"These are the initd scripts:\" && sudo checkrestart | grep ^\"service\" | grep \"restart\r"
+send "sudo checkrestart | grep -E \"Found|distinct\" && echo \"These are the systemd services:\" && sudo checkrestart | grep \"systemctl restart\" && echo \"These are the initd scripts:\" && sudo checkrestart | grep ^\"service\" | grep \"restart\"$\r"
 sleep 1
 expect "assword:"
 send "$password\r"
