@@ -1,6 +1,7 @@
 # NOTE: This file has to be run in Python3
 #!/usr/bin/python3
 from subprocess import call
+import os
 import getpass
 import cp_file_to_host
 import chmod
@@ -23,17 +24,20 @@ password            =   getpass.getpass("The remote host's password: ")
 print("\nInformation gathered\n")
 print("User: {} \nAddress: {} \nPort:{} \n".format(user, address, port))
 
+# Get home directory
+homedir = os.environ['HOME']
+
 # Python scripts
 update_script       =   "~/system_updates/system_update_check.py"
 
 # Bash scripts
-chmod_script        =   "~/server_updates/bash_scripts/chmod.py"
-run_update          =   "~/server_updates/bash_scripts/run_update.sh"
-install_packages    =   "~/server_updates/bash_scripts/install_packages.sh"
-upgrade_all         =   "~/server_updates/bash_scripts/upgrade_all.sh"
-upgrade_security    =   "~/server_updates/bash_scripts/upgrade_security.sh"
-check_services      =   "~/server_updates/bash_scripts/check_services.sh"
-restart_services    =   "~/server_updates/bash_scripts/restart_services.sh"
+chmod_script        =   homedir + "/server_updates/bash_scripts/chmod.py"
+run_update          =   homedir + "/server_updates/bash_scripts/run_update.sh"
+install_packages    =   homedir + "/server_updates/bash_scripts/install_packages.sh"
+upgrade_all         =   homedir + "/server_updates/bash_scripts/upgrade_all.sh"
+upgrade_security    =   homedir + "/server_updates/bash_scripts/upgrade_security.sh"
+check_services      =   homedir + "/server_updates/bash_scripts/check_services.sh"
+restart_services    =   homedir + "/server_updates/bash_scripts/restart_services.sh"
 
 ###################################           ###
 ###         Ensuring            ###          #   #
