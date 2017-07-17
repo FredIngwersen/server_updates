@@ -114,7 +114,7 @@ def print_result(pkgs):
     """
     security_updates = filter(lambda x: x.get('security'), pkgs)
     text = list()
-    text.append('\nCheck Time: %s\n' % strftime('%m/%d/%Y %H:%M:%S'))
+    text.append('\nCheck Time: %s\n' % strftime('%H:%M:%S - %d/%m/%Y'))
     if not pkgs:
         text.append('No available updates on this machine.')
     else:
@@ -140,13 +140,13 @@ def print_result(pkgs):
     return '\n'.join(text)
 
 def write_to_log(textStr):
-    log_path = '/home/administrator/system_updates/system_update_check.log'
+    log_path = '/home/administrator/system_updates/.logs/updates.log'
 
     if os.path.exists(log_path):
-        with open('/home/administrator/system_updates/system_update_check.log', 'a') as log:
+        with open('/home/administrator/system_updates/.logs/updates.log', 'a') as log:
             log.write(str(textStr))
     else:
-        with open('/home/administrator/system_updates/system_update_check.log', 'w') as log:
+        with open('/home/administrator/system_updates/.logs/updates.log', 'w') as log:
             log.write(str(textStr))
 
 

@@ -13,8 +13,8 @@ expect "assword:"
 send "$password\r"
 expect "$ "
 send "sudo apt-get -s dist-upgrade | grep \"^Inst\" |
-    grep -i securi | awk -F \" \" {'print $2'} | 
-    xargs apt-get install\r"
+     grep -i securi | awk -F \" \" {'print $2'} |
+     xargs apt-get install\r"
 sleep 2
 expect "assword:"
 send "$password\r"

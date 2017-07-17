@@ -1,10 +1,42 @@
-#!/bin/bash
+#!/usr/bin/expect -f
 
-ps xh -o pid |
-while read PROCID; do
-       grep 'so.* (deleted)$' /proc/$PROCID/maps 2> /dev/null
-       if [ $? -eq 0 ]; then
-               CMDLINE=$(sed -e 's/\x00/ /g' < /proc/$PROCID/cmdline)
-               echo -e "\tPID $PROCID $CMDLINE\n"
-       fi
-done
+# Will check which upgraded processes need restarting
+# Then write to a log file
+
+# Getting inforamtion as argument
+set username [lindex $argv 0];
+set address [lindex $argv 1];
+set port [lindex $argv 2];
+set password [lindex $argv 3];
+
+spawn ssh $username@$address -p $port
+expect "assword:"
+send "$password\r"
+expect "$ "
+send "sudo checkrestart | grep -E \"Found|distinct\" &&
+     echo \"These are the systemd services:\" &&
+     sudo checkrestart | grep \"systemctl restart\" &&
+     echo \"These are the initd scripts:\" &&
+     sudo checkrestart | grep ^\"service\" | grep \"restart\r"
+sleep 1
+expect "assword:"
+send "$password\r"
+expect "$ "
+send "(date \"+%H:%M:%S - %d/%m/%Y\" &
+     sudo checkrestart | grep -E \"Found|distinct\" &&
+     echo \"These are the systemd services:\" &&
+     sudo checkrestart | grep \"systemctl restart\" &&
+     echo \"These are the initd scripts:\" &&
+     sudo checkrestart | grep ^\"service\" | grep \"restart\"$)
+      >> ~/system_updates/.logs/service_checks.log\r"
+sleep 1
+expect "$ "
+send "printf \"=%.0s\" {1..100} >> service_check.log\r"
+expect "$ "
+send "printf \"\n\" >> service_check.log\r"
+expect "$ "
+send "printf \"\n\" >> service_check.log\r"
+sleep 1
+expect "$ "
+send "exit\r"
+interact
