@@ -8,7 +8,7 @@ set address [lindex $argv 1];
 set port [lindex $argv 2];
 set password [lindex $argv 3];
 
-spawn ssh $username@$address -p $port mkdir -p system_updates .logs
+spawn ssh $username@$address -p $port mkdir -p system_updates system_updates/.logs
 expect "assword:"
 send "$password\r"
 interact
