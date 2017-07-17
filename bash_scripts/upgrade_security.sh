@@ -12,12 +12,17 @@ spawn ssh $username@$address -p $port
 expect "assword:"
 send "$password\r"
 expect "$ "
-send "sudo apt-get -s dist-upgrade | grep \"^Inst\" |
-     grep -i securi | awk -F \" \" {'print $2'} |
-     xargs apt-get install\r"
+send "(date \"+%H:%M:%S - %d/%m/%Y\" && sudo unattended-upgrade) &>> ~/system_updates/.logs/upgrade.log\r"
 sleep 2
 expect "assword:"
 send "$password\r"
 sleep 2
+expect "$ "
+send "printf \"=%.0s\" {1..100} >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
+send "printf \"\n\" >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
+send "printf \"\n\" >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
 send "exit\r"
 interact

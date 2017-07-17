@@ -12,10 +12,17 @@ spawn ssh $username@$address -p $port
 expect "assword:"
 send "$password\r"
 expect "$ "
-send "sudo apt-get upgrade -y\r"
+send "(date \"+%H:%M:%S - %d/%m/%Y\" && sudo apt-get upgrade -y) &>> ~/system_updates/.logs/upgrade.log\r"
 sleep 2
 expect "assword:"
 send "$password\r"
 sleep 2
+expect "$ "
+send "printf \"=%.0s\" {1..100} >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
+send "printf \"\n\" >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
+send "printf \"\n\" >> ~/system_updates/.logs/upgrade.log\r"
+expect "$ "
 send "exit\r"
 interact
