@@ -12,7 +12,7 @@ spawn ssh $username@$address -p $port
 expect "assword:"
 send "$password\r"
 expect "$ "
-send "(date \"+%H:%M:%S - %d/%m/%Y\" && sudo unattended-upgrade) &>> ~/system_updates/.logs/upgrade.log\r"
+send "(date \"+%H:%M:%S - %d/%m/%Y\" && sudo unattended-upgrade -v) &>> ~/system_updates/.logs/upgrade.log\r"
 sleep 2
 expect "assword:"
 send "$password\r"
