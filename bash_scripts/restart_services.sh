@@ -23,7 +23,7 @@ send "echo '#!/usr/bin/bash' | cat - ~/system_updates/restart_services.sh > temp
 expect "$ "
 send "chmod +x ~/system_updates/restart_services.sh\r"
 expect "$ "
-send "sudo ./~/system_updates/restart_services.sh > ~/system_updates/.logs/restart_services.log\r"
+send "bash ~/system_updates/restart_services.sh > ~/system_updates/.logs/restart_services.log\r"
 expect "$ "
 send "exit\r"
 interact
