@@ -22,6 +22,7 @@ send "sed -i -e \"s/^/sudo /\" ~/system_updates/bash_scripts/restart_services.sh
 expect "$ "
 send "chmod +x ~/system_updates/bash_scripts/restart_services.sh\r"
 expect "$ "
-send "sudo ./~/system_updates/bash_scripts/restart_services.sh > ~/system_updates/.logs/restart_services.log\r"
+send "sudo ./~/system_updates/bash_scripts/restart_services.sh
+      > ~/system_updates/.logs/restart_services.log\r"
 send "exit\r"
 interact

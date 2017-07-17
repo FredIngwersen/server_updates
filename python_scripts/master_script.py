@@ -3,6 +3,7 @@
 from subprocess import call
 import getpass
 import cp_file_to_host
+import chmod
 
 # This script is made up of three parts; information gathering, prerequisites & execution
 # Step number two can be skipped if the admin knows that the remote machine already ran the script before
@@ -26,12 +27,13 @@ print("User: {} \nAddress: {} \nPort:{} \n".format(user, address, port))
 update_script       =   "~/system_updates/system_update_check.py"
 
 # Bash scripts
-run_update          =   "/home/administrator/server_updates/bash_scripts/run_update.sh"
-install_packages    =   "/home/administrator/server_updates/bash_scripts/install_packages.sh"
-upgrade_all         =   "/home/administrator/server_updates/bash_scripts/upgrade_all.sh"
-upgrade_security    =   "/home/administrator/server_updates/bash_scripts/upgrade_security.sh"
-check_services      =   "/home/administrator/server_updates/bash_scripts/check_services.sh"
-restart_services    =   "/home/administrator/server_updates/bash_scripts/restart_services.sh"
+chmod_script        =   "~/server_updates/bash_scripts/chmod.py"
+run_update          =   "~/server_updates/bash_scripts/run_update.sh"
+install_packages    =   "~/server_updates/bash_scripts/install_packages.sh"
+upgrade_all         =   "~/server_updates/bash_scripts/upgrade_all.sh"
+upgrade_security    =   "~/server_updates/bash_scripts/upgrade_security.sh"
+check_services      =   "~/server_updates/bash_scripts/check_services.sh"
+restart_services    =   "~/server_updates/bash_scripts/restart_services.sh"
 
 ###################################           ###
 ###         Ensuring            ###          #   #
@@ -40,9 +42,14 @@ restart_services    =   "/home/administrator/server_updates/bash_scripts/restart
 ###################################         #######
 
 # Prerequisites are:
+# - all the bash files have the right permissions
 # - Python2 & 3
 # - Correct directory
 # - "system_update_check.py" file in the right directory
+
+# making sure all the bash files can be executed
+print("First, making sure all the bash scripts can be executed:")
+chmod.main()
 
 # Option to not run the prerequisites
 prerequisites_y_n = input("Do you want to run through the prerequisites before running the scripts? [y/n]: ")
