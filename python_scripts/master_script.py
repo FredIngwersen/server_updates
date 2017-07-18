@@ -31,6 +31,7 @@ homedir = os.environ['HOME']
 update_script       =   "~/system_updates/system_update_check.py"
 
 # Bash scripts
+establish_ssh       =   homedir + "/server_updates/bash_scripts/establish_ssh.sh"
 chmod_script        =   homedir + "/server_updates/bash_scripts/chmod.py"
 run_update          =   homedir + "/server_updates/bash_scripts/run_update.sh"
 install_packages    =   homedir + "/server_updates/bash_scripts/install_packages.sh"
@@ -52,8 +53,12 @@ restart_services    =   homedir + "/server_updates/bash_scripts/restart_services
 # - "system_update_check.py" file in the right directory
 
 # making sure all the bash files can be executed
-print("First, making sure all the bash scripts can be executed:")
+print("\nFirst, making sure all the bash scripts can be executed:")
 chmod.main()
+
+# Checking the SSH connection - will establish an ssh-key if needed 
+print("\nChecking if ssh-key is needed")
+call([establish_ssh, user, address, port, password])
 
 # Option to not run the prerequisites
 prerequisites_y_n = input("Do you want to run through the prerequisites before running the scripts? [y/n]: ")
