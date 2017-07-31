@@ -12,7 +12,7 @@ spawn ssh $username@$address -p $port
 expect "assword:"
 send "$password\r"
 expect "$ "
-send "sudo apt-get install -y python python3 debian-goodies unattended-upgrades\r"
+send "sudo apt-get install -y python python3 python-apt debian-goodies unattended-upgrades\r"
 sleep 2
 expect "assword:"
 send "$password\r"
