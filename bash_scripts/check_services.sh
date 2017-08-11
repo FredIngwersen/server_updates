@@ -23,9 +23,9 @@ sleep 1
 expect "$ "
 send "printf \"=%.0s\" {1..100} &>> ~/system_updates/.logsservice_check.log\r"
 expect "$ "
-send "printf \"\n\" &>> ~/system_updates/.logsservice_check.log\r"
+send "printf \"\n\" &>> ~/system_updates/.logs/service_check.log\r"
 expect "$ "
-send "printf \"\n\" &>> ~/system_updates/.logsservice_check.log\r"
+send "printf \"\n\" &>> ~/system_updates/.logs/service_check.log\r"
 sleep 1
 expect "$ "
 send "exit\r"
